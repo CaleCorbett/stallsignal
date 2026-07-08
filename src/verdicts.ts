@@ -1,4 +1,4 @@
-// Verdict copy and routing -- what each classification means and what to do next.
+// Verdict copy -- what each classification means and what to do next.
 
 import type { Verdict } from './scoring'
 
@@ -7,7 +7,6 @@ export interface VerdictCopy {
   tone: 'ok' | 'warn' | 'bad'
   meaning: string
   nextSteps: string[]
-  route: { label: string; href: string; note: string }
 }
 
 export const VERDICTS: Record<Verdict, VerdictCopy> = {
@@ -19,12 +18,8 @@ export const VERDICTS: Record<Verdict, VerdictCopy> = {
     nextSteps: [
       'Re-run this check monthly. Stalls rarely announce themselves; they drift first.',
       'Watch the two dimensions with your highest scores. That is where drift will start.',
+      'Keep the one-sentence definition of done visible. Healthy initiatives stay healthy by re-stating it, not by assuming it.',
     ],
-    route: {
-      label: 'Get the free Field Guide',
-      href: 'https://controlaltrecover.com/field-guide',
-      note: 'A practical guide to spotting drift before it becomes damage.',
-    },
   },
   drift: {
     title: 'Early Drift',
@@ -34,13 +29,8 @@ export const VERDICTS: Record<Verdict, VerdictCopy> = {
     nextSteps: [
       'Take the flagged signals below to your next leadership sync -- verbatim. Naming drift early is the whole game.',
       'Re-validate scope and the definition of done with the sponsor this week.',
-      'Re-run this diagnostic in 30 days and compare scores.',
+      'Re-run this diagnostic in 30 days and compare scores. Direction matters more than the number.',
     ],
-    route: {
-      label: 'Get the free Field Guide',
-      href: 'https://controlaltrecover.com/field-guide',
-      note: 'Built for exactly this stage: diagnose drift, reset priorities, restore momentum.',
-    },
   },
   mechanical: {
     title: 'Mechanical Break',
@@ -52,11 +42,6 @@ export const VERDICTS: Record<Verdict, VerdictCopy> = {
       'Convert every "waiting on" into a named owner and a committed date, or cut it from the plan.',
       'If nobody can restate the one-sentence outcome, the initiative is not stalled -- it is undefined. Fix that first.',
     ],
-    route: {
-      label: 'Get the Strategy Alignment Playbook ($59)',
-      href: 'https://controlaltrecover.com/playbook',
-      note: '17 frameworks for practitioners accountable for outcomes they do not fully control.',
-    },
   },
   environmental: {
     title: 'Environmental Block',
@@ -66,13 +51,8 @@ export const VERDICTS: Record<Verdict, VerdictCopy> = {
     nextSteps: [
       'Map who can actually say yes to the top three open decisions. If the answer is a committee or "nobody", that map is your real problem statement.',
       'Test sponsorship directly: ask the sponsor to publicly restate why this matters. Silence is data.',
-      'Do not burn your team on execution fixes. Environmental blocks stall the next plan too.',
+      'Do not burn your team on execution fixes. Environmental blocks stall the next plan too -- take the brief below to whoever owns the decision system.',
     ],
-    route: {
-      label: 'Explore the CAR diagnostics',
-      href: 'https://controlaltrecover.com/diagnostics',
-      note: 'Environmental blocks usually need a facilitated read. Self-serve tools hit their limit here.',
-    },
   },
   compound: {
     title: 'Compound Stall',
@@ -82,12 +62,7 @@ export const VERDICTS: Record<Verdict, VerdictCopy> = {
     nextSteps: [
       'Do not relaunch yet. A restart into a broken decision system converts your remaining credibility into evidence against the initiative.',
       'Sequence matters: decision rights and sponsorship first, then scope and resourcing. The reverse order does not hold.',
-      'This is beyond self-serve territory. Get an outside read before committing to a recovery plan.',
+      'This is bigger than one operator can fix alone. Use the brief below to force the conversation with an executive sponsor or an outside facilitator.',
     ],
-    route: {
-      label: 'Take the Executive Diagnostic',
-      href: 'https://controlaltrecover.com/executive-diagnostic',
-      note: 'A structured 90-minute read on whether this needs a workshop, a facilitated reset, or ongoing support.',
-    },
   },
 }

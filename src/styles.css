@@ -202,12 +202,16 @@ main { flex: 1; }
 
 .route {
   display: block;
+  width: 100%;
+  text-align: left;
   margin-top: 18px;
   padding: 14px 16px;
   background: #10203a;
   border: 1px solid #2b4a7a;
   border-radius: 8px;
   text-decoration: none;
+  cursor: pointer;
+  font-family: inherit;
 }
 .route:hover { border-color: var(--accent); }
 .route-label { display: block; color: var(--accent); font: 600 14px var(--mono); margin-bottom: 4px; }

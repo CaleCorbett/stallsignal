@@ -1,6 +1,27 @@
 import { useState } from 'react'
-import { DIMENSIONS, DIMENSION_ORDER, score } from './scoring'
-import { VERDICTS } from './verdicts'
+import { DIMENSIONS, DIMENSION_ORDER, score, type Result } from './scoring'
+import { VERDICTS, type VerdictCopy } from './verdicts'
+
+function buildBrief(result: Result, v: VerdictCopy): string {
+  const dims = DIMENSION_ORDER.map(
+    (key) => `${DIMENSIONS[key].label}: ${result.dimensionScores[key]}/9`,
+  ).join(' | ')
+  const lines = [
+    `STALLSIGNAL DIAGNOSTIC -- ${v.title}`,
+    `Mechanical ${result.mechanical}/18 · Environmental ${result.environmental}/18`,
+    dims,
+    '',
+    `What this means: ${v.meaning}`,
+  ]
+  if (result.signals.length > 0) {
+    lines.push('', 'Signals detected:')
+    result.signals.forEach((s) => lines.push(`- ${s}`))
+  }
+  lines.push('', 'Recommended next steps:')
+  v.nextSteps.forEach((s, i) => lines.push(`${i + 1}. ${s}`))
+  lines.push('', `Full result: ${window.location.href}`)
+  return lines.join('\n')
+}
 
 export default function Results({
   answers,
@@ -11,13 +32,13 @@ export default function Results({
 }) {
   const result = score(answers)
   const v = VERDICTS[result.verdict]
-  const [copied, setCopied] = useState(false)
+  const [copied, setCopied] = useState<'link' | 'brief' | null>(null)
 
-  const copyLink = async () => {
+  const copy = async (kind: 'link' | 'brief', text: string) => {
     try {
-      await navigator.clipboard.writeText(window.location.href)
-      setCopied(true)
-      setTimeout(() => setCopied(false), 2000)
+      await navigator.clipboard.writeText(text)
+      setCopied(kind)
+      setTimeout(() => setCopied(null), 2000)
     } catch {
       // clipboard unavailable; the URL bar still has the link
     }
@@ -83,15 +104,26 @@ export default function Results({
             <li key={i}>{step}</li>
           ))}
         </ol>
-        <a className="route" href={v.route.href} target="_blank" rel="noreferrer">
-          <span className="route-label">{v.route.label} →</span>
-          <span className="route-note">{v.route.note}</span>
-        </a>
+        <button
+          className="route"
+          onClick={() => copy('brief', buildBrief(result, v))}
+        >
+          <span className="route-label">
+            {copied === 'brief' ? 'Brief copied ✓' : 'Copy team brief →'}
+          </span>
+          <span className="route-note">
+            A plain-text summary of this result -- verdict, scores, signals, next steps -- ready to
+            paste into Slack or an email to your sponsor.
+          </span>
+        </button>
       </section>
 
       <div className="result-actions">
-        <button className="btn-primary" onClick={copyLink}>
-          {copied ? 'Link copied ✓' : 'Copy shareable link'}
+        <button
+          className="btn-primary"
+          onClick={() => copy('link', window.location.href)}
+        >
+          {copied === 'link' ? 'Link copied ✓' : 'Copy shareable link'}
         </button>
         <button className="btn-ghost" onClick={onRestart}>
           Run it again

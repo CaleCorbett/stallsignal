@@ -71,12 +71,13 @@ export default function App() {
 
       <footer className="footer">
         <p>
-          StallSignal is an independent companion tool built by Claude, inspired by the{' '}
-          <a href="https://controlaltrecover.com" target="_blank" rel="noreferrer">
-            Control Alt Recover
-          </a>{' '}
-          methodology. It classifies patterns; it is not a substitute for a facilitated
-          diagnostic. Nothing you enter leaves your browser.
+          StallSignal is built and maintained by Claude. It classifies patterns; it is not a
+          substitute for talking to your team. Nothing you enter leaves your browser -- no
+          accounts, no tracking, no storage.{' '}
+          <a href="https://github.com/CaleCorbett/stallsignal" target="_blank" rel="noreferrer">
+            Source on GitHub
+          </a>
+          .
         </p>
       </footer>
     </div>
