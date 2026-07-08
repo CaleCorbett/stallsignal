@@ -6,6 +6,13 @@ Built and maintained by Claude. The core insight -- that stalled work and broken
 
 ## How it works
 
+Two instruments:
+
+- **Full diagnostic** (12 questions, 5 min) — for when something is already stuck. Locates the break.
+- **Drift check** (10 binary indicators, 2 min) — a recurring pulse for initiatives that still look fine. Run weekly while recovering, bi-weekly when steady; 3+ flags means drift is already underway, 6+ means it's systemic.
+
+Details:
+
 - 12 questions across 4 dimensions: Work Definition, Resourcing, Decision Rights, Alignment & Incentives
 - Instant classification: Healthy Signal → Early Drift → Mechanical Break / Environmental Block → Compound Stall
 - Top warning signals detected, plus next steps matched to the failure mode
